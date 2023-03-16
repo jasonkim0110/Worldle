@@ -1,0 +1,38 @@
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+}
+
+.keyboard-key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.keyboard-key:hover {
+  background-color: #f0f0f0;
+}
+
+.keyboard-key.active {
+  background-color: #a6c1ff;
+}
+
+.keyboard-key.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
