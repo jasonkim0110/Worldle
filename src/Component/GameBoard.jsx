@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../CSS/gameCSS.css';
 import KeyBoard from '../Component/KeyBoard';
 
@@ -7,10 +7,16 @@ const GameBoard = ({ level }) => {
   const numCols = level === 'normal' ? 6 : 7;
   const numLetters = level === 'normal' ? 6 : 7;
 
-  const handleLetterClick = (letter) => {
-    console.log(`Clicked letter: ${letter}`);
-  };
+  const [inputValues, setInputValues] = useState(Array(numLetters).fill(''));
 
+  const handleLetterClick = (letter) => {
+    const index = inputValues.findIndex((value) => value === '');
+    if (index !== -1) {
+      const newValues = [...inputValues];
+      newValues[index] = letter;
+      setInputValues(newValues);
+    }
+  };
   const renderBoard = () => {
     const board = [];
     for (let i = 0; i < numRows; i++) {
@@ -34,8 +40,10 @@ const GameBoard = ({ level }) => {
   return (
     <div className="game-board">
       <h2>{level.toUpperCase()} LEVEL</h2>
-      <div className="board">{renderBoard()}</div>
-      <KeyBoard onLetterClick={handleLetterClick} />
+      <div className="board">
+        {renderBoard()}
+        <KeyBoard onLetterClick={handleLetterClick} />
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../CSS/keyboardCSS.css';
 
-const Keyboard = ({ onLetterClick }) => {
+const Keyboard = ({ handleLetterClick }) => {
   const letters = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
 
   const renderKeyboard = () => {
@@ -13,7 +13,7 @@ const Keyboard = ({ onLetterClick }) => {
             <div
               key={`${i}-${j}`}
               className="keyboard-letter"
-              onClick={() => onLetterClick(letter)}
+              onClick={() => handleLetterClick(letter)}
             >
               {letter}
             </div>
