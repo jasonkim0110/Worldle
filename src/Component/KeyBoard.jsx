@@ -1,23 +1,54 @@
 import React from 'react';
 import '../CSS/keyboardCSS.css';
 
-const Keyboard = ({ handleLetterClick }) => {
+const KeyBoard = ({ onLetterClick }) => {
   const letters = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
+
+  const handleDeleteClick = () => {
+    onLetterClick('Delete');
+  };
 
   const renderKeyboard = () => {
     return letters.map((row, i) => {
       const rowLetters = row.split('');
       return (
         <div key={i} className="keyboard-row">
+          {i === 2 && (
+            <>
+              <button
+                key={`${i}-back`}
+                className="keyboard-letter-Back"
+                onClick={() => onLetterClick('Back')}
+              >
+                Back
+              </button>
+              <button
+                key={`${i}-delete`}
+                className="keyboard-letter-Delete "
+                onClick={() => handleDeleteClick('Delete')}
+              >
+                Del
+              </button>
+            </>
+          )}
           {rowLetters.map((letter, j) => (
-            <div
+            <button
               key={`${i}-${j}`}
-              className="keyboard-letter"
-              onClick={() => handleLetterClick(letter)}
+              className="keyboard-letter keyboard-key"
+              onClick={() => onLetterClick(letter)}
             >
               {letter}
-            </div>
+            </button>
           ))}
+          {i === letters.length - 1 && (
+            <button
+              key={`${i}-enter`}
+              className="keyboard-letter-Enter"
+              onClick={() => onLetterClick('Enter')}
+            >
+              Enter
+            </button>
+          )}
         </div>
       );
     });
@@ -26,4 +57,4 @@ const Keyboard = ({ handleLetterClick }) => {
   return <div className="keyboard">{renderKeyboard()}</div>;
 };
 
-export default Keyboard;
+export default KeyBoard;

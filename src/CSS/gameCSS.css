@@ -8,10 +8,19 @@
   margin-top: 1rem;
 }
 
+.keyboard-container {
+  display: flex;
+  justify-content: center;
+}
+
 .board-row {
   display: flex;
   justify-content: center;
   margin-bottom: 0.5rem;
+}
+
+.board-row.current-row {
+  background-color: yellow;
 }
 
 .board-square {
@@ -23,6 +32,10 @@
   margin: 0 0.5rem;
   border: 2px solid black;
   font-size: 2rem;
+  /* background-color: white; */
+}
+.board-square.board-row.current-row {
+  background-color: white;
 }
 
 input[type='text'] {
