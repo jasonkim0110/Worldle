@@ -1,16 +1,16 @@
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './CSS/App.css';
-// import { Route, Switch, Link } from 'react-router-dom';
 import GameBoard from './Component/GameBoard';
 import Rules from './Component/Rules';
 import './CSS/RulesCSS.css';
-// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
   const [level, setLevel] = useState(null);
   const handleLevelSelection = (selectedLevel) => {
     setLevel(selectedLevel);
   };
+
   return (
     <div className="App">
       <nav>
@@ -28,7 +28,7 @@ function App() {
             <button onClick={() => handleLevelSelection('hard')}>Hard</button>
           </div>
           <p></p>
-          <button onClick={() => Rules}>Rules</button>
+          <button onClick={<Rules />}>Rules</button>
         </div>
       )}
     </div>

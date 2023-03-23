@@ -17,10 +17,10 @@ const KeyBoard = ({ onLetterClick }) => {
             <>
               <button
                 key={`${i}-back`}
-                className="keyboard-letter-Back"
-                onClick={() => onLetterClick('Back')}
+                className="keyboard-letter-Reset"
+                onClick={() => onLetterClick('Reset')}
               >
-                Back
+                Reset
               </button>
               <button
                 key={`${i}-delete`}

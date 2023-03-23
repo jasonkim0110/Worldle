@@ -19,10 +19,6 @@
   margin-bottom: 0.5rem;
 }
 
-.board-row.current-row {
-  background-color: yellow;
-}
-
 .board-square {
   display: flex;
   align-items: center;
@@ -32,8 +28,9 @@
   margin: 0 0.5rem;
   border: 2px solid black;
   font-size: 2rem;
-  /* background-color: white; */
+  background-color: wheat;
 }
+
 .board-square.board-row.current-row {
   background-color: white;
 }
@@ -46,4 +43,16 @@ input[type='text'] {
   font-size: 2rem;
   font-weight: bold;
   letter-spacing: 0.1rem;
+}
+
+input[type='text'].correct {
+  background-color: green;
+}
+
+input[type='text'].Partcorrect {
+  background-color: yellow;
+}
+
+input[type='text'].incorrect {
+  background-color: gray;
 }
