@@ -1,16 +1,48 @@
 .game-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   background-color: wheat;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 2rem;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
+.level-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: transparent;
+  padding: 1rem;
+  z-index: 100;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+}
 .board {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .keyboard-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .board-row {
@@ -55,4 +87,20 @@ input[type='text'].Partcorrect {
 
 input[type='text'].incorrect {
   background-color: gray;
+}
+
+@media (max-width: 390px) {
+  .board-square {
+    width: 20px;
+    height: 20px;
+    font-size: 25px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .level-container {
+    padding: 0.5rem;
+  }
 }

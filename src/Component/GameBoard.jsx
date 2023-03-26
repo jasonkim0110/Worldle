@@ -8,7 +8,19 @@ const GameBoard = ({ level }) => {
   const numCols = level === 'normal' ? 6 : 7;
   const numLetters = level === 'normal' ? 6 : 7;
   const lastCol = level === 'normal' ? 5 : 6;
-  const normalDictionary = ['banana'];
+
+  const normalDictionary = [
+    'banana',
+    'camera',
+    'dinner',
+    'eleven',
+    'flower',
+    'guitar',
+    'hunger',
+    'island',
+    'jacket',
+    'kitten',
+  ];
 
   const hardDictionary = [
     'bicycle',
@@ -42,20 +54,38 @@ const GameBoard = ({ level }) => {
 
   const [message, setMessage] = useState('');
 
-  const getColor = (letter, index, row) => {
-    if (!guessWord.includes(letter)) {
-      return 'gray';
-    } else if (row < currentRow && guessWord[index] === letter) {
+  const getColor = (letter, index, row = currentRow) => {
+    if (
+      row < currentRow ||
+      (row === currentRow && index <= currentCol) ||
+      (row === numRows - 1 && disableInputs)
+    ) {
+      if (!guessWord.includes(letter)) {
+        return 'gray';
+      } else if (row < currentRow && guessWord[index] === letter) {
+        return 'green';
+      } else if (row === currentRow && highlightedLetters.includes(index)) {
+        return 'yellow';
+      } else if (
+        row === numRows - 1 &&
+        disableInputs &&
+        guessWord[index] === letter
+      ) {
+        return 'green';
+      }
+    } else if (row === currentRow && guessWord[index] === letter) {
       return 'green';
-    } else {
-      return 'yellow';
     }
+    return 'transparent';
   };
 
   const handleLetterClick = (letter) => {
+    if (disableInputs) return;
+
+    const newValues = [...inputValues];
+
     if (letter === 'Delete') {
       // Delete the last non-empty input in the current row
-      const newValues = [...inputValues];
       let index;
       for (let i = numCols - 1; i >= 0; i--) {
         index = currentRow * numCols + i;
@@ -67,15 +97,11 @@ const GameBoard = ({ level }) => {
         }
       }
     } else if (letter === 'Enter') {
-      if (
-        currentAttempt.length < guessWord.length ||
-        currentAttempt.length > guessWord.length
-      ) {
+      if (currentAttempt.length < guessWord.length) {
         setMessage('Word length must be ' + guessWord.length);
       } else {
         if (currentAttempt === guessWord) {
           setMessage('Congratulations!');
-          let newValues = [...inputValues];
           let highlightedLetters = [];
           for (let i = 0; i < guessWord.length; i++) {
             newValues[currentRow * numCols + i] = currentAttempt[i];
@@ -86,23 +112,21 @@ const GameBoard = ({ level }) => {
           setHighlightedLetters(highlightedLetters);
           return;
         } else {
-          let newValues = [...inputValues];
           let highlightedLetters = [];
           for (let i = 0; i < guessWord.length; i++) {
-            const color = getColor(currentAttempt[i], i);
             newValues[currentRow * numCols + i] = currentAttempt[i];
-            if (color === 'green') {
+            if (guessWord[i] === currentAttempt[i]) {
               highlightedLetters.push(i);
             }
           }
           setInputValues(newValues);
+          setHighlightedLetters(highlightedLetters);
           setCurrentRow(currentRow + 1);
           setCurrentCol(0);
           setCurrentAttempt('');
           if (currentRow === numRows - 1 || currentAttempt === guessWord) {
             setDisableInputs(true);
           }
-          setHighlightedLetters(highlightedLetters);
         }
       }
     } else if (letter === 'Reset') {
@@ -118,7 +142,6 @@ const GameBoard = ({ level }) => {
       setGuessWord(dictionary[randomIndex]);
     } else {
       // Fill the next empty input with the clicked letter (only for current row)
-      const newValues = [...inputValues];
       const index = currentRow * numCols + currentCol;
       if (newValues[index] === '' && currentRow < numRows) {
         newValues[index] = letter;
@@ -171,7 +194,12 @@ const GameBoard = ({ level }) => {
                 maxLength="1"
                 value={inputValue}
                 className={inputClassName}
-                style={{ backgroundColor: backgroundColor }}
+                style={{
+                  backgroundColor:
+                    i < currentRow || disableInputs
+                      ? backgroundColor
+                      : 'transparent',
+                }}
                 onChange={(event) => handleLetterClick(event.target.value)}
               />
             )}
@@ -199,7 +227,11 @@ const GameBoard = ({ level }) => {
   return (
     <div className="game-board">
       {message && <div className="message">{message}</div>}
-      <h2>{level.toUpperCase()} LEVEL</h2>
+
+      <div className="level-container">
+        <h2>{level.toUpperCase()} LEVEL</h2>
+      </div>
+
       <div className="board">
         {renderBoard()}
         <div className="keyboard-container">

@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import Rules from './Component/Rules';
+import GameBoard from './Component/GameBoard';
 
 const RulesRouter = createBrowserRouter([
   {
@@ -13,6 +14,15 @@ const RulesRouter = createBrowserRouter([
   {
     path: '/rules',
     element: <Rules />,
+  },
+
+  {
+    path: '/game/normal',
+    element: <GameBoard level={'normal'}></GameBoard>,
+  },
+  {
+    path: '/game/hard',
+    element: <GameBoard level={'hard'}></GameBoard>,
   },
 ]);
 

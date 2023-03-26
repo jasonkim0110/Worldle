@@ -83,3 +83,14 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 390px) {
+  .keyboard-letter,
+  .keyboard-letter-Enter,
+  .keyboard-letter-Reset,
+  .keyboard-letter-Delete {
+    width: 8px;
+    height: 8px;
+    font-size: 10px;
+  }
+}

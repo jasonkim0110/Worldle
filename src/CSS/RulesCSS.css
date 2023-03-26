@@ -1,17 +1,7 @@
-.rules-link {
+html,
+body {
   background-color: wheat;
   color: black;
   text-decoration: underline;
   cursor: pointer;
 }
-
-/* 'banana',
-'camera',
-'dinner',
-'eleven',
-'flower',
-'guitar',
-'hunger',
-'island',
-'jacket',
-'kitten', */

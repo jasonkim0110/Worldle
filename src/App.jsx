@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <nav>
         <h1>Wordle</h1>
+        {level && <h2>{level.toUpperCase()} LEVEL</h2>}
       </nav>
       {level ? (
         <GameBoard level={level}></GameBoard>
@@ -22,13 +23,12 @@ function App() {
         <div className="level-selection">
           <h2>Select Difficulty Level:</h2>
           <div>
-            <button onClick={() => handleLevelSelection('normal')}>
-              Normal
-            </button>
-            <button onClick={() => handleLevelSelection('hard')}>Hard</button>
+            <Link to={'/game/normal'}>Normal</Link>
+            <p></p>
+            <Link to={'/game/hard'}>Hard</Link>
           </div>
           <p></p>
-          <button onClick={<Rules />}>Rules</button>
+          <Link to={'/rules'}>Rules</Link>
         </div>
       )}
     </div>
